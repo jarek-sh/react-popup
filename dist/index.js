@@ -316,6 +316,10 @@ var Component = function (_React$Component) {
         key: 'containerClick',
         value: function containerClick(e) {
             if (this.state.closeOnOutsideClick && hasClass(e.target, this.props.className)) {
+                var popup = Store.activePopup();
+                if (popup.onCloseCallback) {
+                    popup.onCloseCallback();
+                }
                 Store.close();
             }
         }
