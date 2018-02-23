@@ -14,7 +14,7 @@ const propTypes = {
     defaultOk: PropTypes.string,
     defaultCancel: PropTypes.string,
     wildClasses: PropTypes.bool,
-    closeOnOutsideClick: PropTypes.bool,
+    closeOnOutsideClick: PropTypes.bool
 };
 
 const defaultProps = {
@@ -25,7 +25,7 @@ const defaultProps = {
     defaultOk: 'Ok',
     defaultCancel: 'Cancel',
     wildClasses: false,
-    closeOnOutsideClick: true,
+    closeOnOutsideClick: true
 };
 
 const initialState = {
@@ -246,6 +246,10 @@ class Component extends React.Component {
      */
     containerClick(e) {
         if (this.state.closeOnOutsideClick && hasClass(e.target, this.props.className)) {
+            const popup = Store.activePopup();
+            if (popup.onCloseCallback) {
+                popup.onCloseCallback();
+            }
             Store.close();
         }
     }
